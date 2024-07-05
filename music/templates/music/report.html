@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Report
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-container">
+
+        <div class="main-container">
+
+        <div class="divition4" id="main-div">
+        <div class="inputsh">
+            {% for day in days %}
+                <input type="hidden" value="{{ day.day_name }} {{ day.count }}" id="datachart" dayname="{{ day.day_name }}" daycount="{{ day.count }}">
+            {% empty %}
+                <input type="hidden" value="null">
+            {% endfor %}
+
+            {# Sunday 123 #}
+            <input type="hidden" name="">
+        </div>
+        <div class="title-report">
+            <h3> {{ report_info.user.username }} Music  Report from {{ report_info.period }}</h3>
+        </div>
+
+            <div class="grid-container">
+                <div class="grid-item">
+                        <div class="ge-main-l">
+                            <img src="{% static 'img/imgreport.jpg' %}" alt="" class="report-img">
+                            <h5 class="banner">{{ report.roll_log.qty }} Rolls this week</h5>
+
+
+
+                        </div>
+                        <div class="ge-main-r">
+                            <h3>Roll Log</h3>
+                            <div class="r-table">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                </div>
+                <div class="grid-item2">
+                    <div class="fd"> <p class="tobold">Main Summary</p> <p>This week you've listened to:</p> </div>
+
+                    <div class="inner-container">
+                    <div class="inner-item s1"> <p>Tracks</p><p>{{ report.main_summary.songs }}</p></div>
+                    <div class="inner-item s2"><p>Albums</p><p>{{ report.main_summary.albums }}</p></div>
+                <div class="inner-item s3"><p>Artists</p><p>{{ report.main_summary.artists }}</p></div>
+            </div>
+</div>
+
+                <div class="grid-item">
+                        <div class="ge-main-l">
+                            <img src="{{ report.tracks_summary.top_track_info.cover_url }}" alt="" class="report-img">
+                            <h5 class="banner">Top Track</h5>
+                            <h5> {{ report.tracks_summary.top_track_info.name }} </h5>
+                            <h5 class="small-font-rolls" > {{ report.tracks_summary.top_track_info.qty }} Rolls </h5>
+
+
+
+                        </div>
+                        <div class="ge-main-r">
+                            <h3>Tracks Summary</h3>
+                            <div class="r-table">
+                                {% for songs in report.tracks_summary.top_tracks %}
+                                <h5 class="datashow"> {{ forloop.counter|add:"1" }}. {{ songs.name }} - {{ songs.count }} Rolls</h5>
+                                {% empty %}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                </div>
+                <div class="grid-item">
+                        <div class="ge-main-l">
+                            <img src="{{ report.albums_summary.top_album_info.cover_url }}" alt="" class="report-img">
+                            <h5 class="banner">Top album</h5>
+                            <h5> {{ report.albums_summary.top_album_info.name }} </h5>
+                            <h5 class="small-font-rolls"> {{ report.albums_summary.top_album_info.qty }} Rolls </h5>
+
+
+
+                        </div>
+                        <div class="ge-main-r">
+                            <h3>Albums Summary</h3>
+                            <div class="r-table">
+                                {% for album in report.albums_summary.top_albums %}
+                                <h5 class="datashow"> {{ forloop.counter|add:"1" }}. {{ album.name }} - {{ album.count }} Rolls </h5>
+                                {% empty %}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                </div>
+                <div class="grid-item">
+                        <div class="ge-main-l">
+                            <img src="{{ report.artists_summary.top_artist_info.cover_url }}" alt="" class="report-img">
+                            <h5 class="banner">Top artist</h5>
+                            <h5> {{ report.artists_summary.top_artist_info.name }}</h5>
+                            <h5 class="small-font-rolls"> {{ report.artists_summary.top_artist_info.qty }} Rolls </h5>
+
+
+
+                        </div>
+                        <div class="ge-main-r">
+                            <h3>Artists Summary</h3>
+                            <div class="r-table">
+                                {% for artists in report.artists_summary.top_artists %}
+                                <h5 class="datashow"> {{ forloop.counter|add:"1" }}. {{ artists.name }} - {{ artists.count }} Rolls </h5>
+                                {% empty %}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                </div>
+                <div class="grid-item2">
+                    <div class="fd"> <h4>Details</h4> </div>
+
+                    <div class="inner-container2">
+                    <div class="inner-item s1"> <p>Avg Rolls</p><p> {{ report.details.avg }} / day</p></div>
+                    <div class="inner-item s2">
+                        <p>Best Day</p>
+                        <p>{{ report.details.max_day }}</p>
+                        <p>{{ report.details.max_day_qty }} rolls</p>
+
+                    </div>
+
+            </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+        <script defer>
+            const ctx = document.getElementById('myChart');
+            const data = document.querySelectorAll('#datachart')
+            const days = [];
+            const qty = [];
+            data.forEach((data) => {
+                console.log(data)
+                console.log(data.getAttribute('dayname'), data.getAttribute('daycount'))
+                 days.push(data.getAttribute('dayname'));
+                qty.push(parseInt(data.getAttribute('daycount')));
+
+            })
+            console.log(days, qty)
+            console.log('days', days)
+            console.log('qty', qty)
+
+            new Chart(ctx, {
+            type: 'bar',
+        data: {
+        labels: days,
+        datasets: [{
+            label: 'Rolls',
+            data: qty,
+            borderWidth: 1
+          }]
+        },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+        </script>
+
+    </div>
+{% endblock %}

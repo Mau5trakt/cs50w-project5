@@ -1,0 +1,5 @@
+# first initialize  the celery scheduler
+celery -A Rolalog beat -l INFO
+
+# then run a celery worker using eventlet as the concurrency backend
+celery -A Rolalog worker -l INFO -P eventlet

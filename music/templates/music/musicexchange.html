@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Music Exchange
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-container">
+    <div class="card">
+        {% if image %}
+        <img  class="profile-img" src="{{ user.image.url }}" alt="">
+            {% else %}
+        <img  class="profile-img" src="{% static 'img/defaultimage.png' %}" alt="">
+        {% endif %}
+
+        <div class="divition">
+            <div class="links">
+                <h3 class="font-principal" id="username">{{ user.username }}</h3>
+
+                <a href=" {% url 'homepage' user.username %} ">Profile</a>
+                <a href="{% url 'library' user.username %}">Library </a>
+                <a href="{% url 'latest_report' user.username %}">Music Report</a>
+
+        </div>
+            </div>
+
+
+    </div>
+
+
+    <div class="main-container">
+
+    <div class="divition2" id="main-div">
+        <div class="card2">
+           <div class="links">
+                <h3 class="font-principal" id="username">Music Exchange Requests</h3>
+                <a href="{% url 'create_me' %}">Create</a>
+                <a href="{% url 'history_me' %}">History</a>
+        </div>
+
+
+            <div class="table" id="table">
+
+            {# for song in history #}
+
+            <div class="row" >
+                <div class="song-title"> <h5 class="ctext"> From </h5>   </div>
+                <div class="song-title"> <h5 class="ctext"> Image </h5>   </div>
+                <div class="song-title"> <h5 class="ctext"> Item Name </h5>   </div>
+                <div class="song-title"> <h5 class="ctext"> Type </h5>   </div>
+                <div class="song-title"> <h5 class="ctext"> Accept </h5>   </div>
+                <div class="song-title"> <h5 class="ctext"> Reject </h5>   </div>
+                <div class="song-title"> <h5 class="ctext"> Date </h5>   </div>
+                </div>
+
+                {% for element in requests %}
+
+                    <div class="row" >
+                    <input type="hidden" value="{{ element.id }}" id="id_item">
+
+                        <div class="song-title"><a href="{% url 'homepage' element.owner %}"> <h4> {{ element.owner }} </h4> </a> </div>
+                    <div class="img">
+                        <a href="{{ element.spotify_link }}"><img class="cover-img" src="{{ element.item_image_url }}" alt=""></a>
+                    </div>
+
+                    <div class="artist-name"> <a href="{{ element.spotify_link }}"> {{ element.item_name }} </a>    </div>
+                    <div class="artist-name">  <p> {{ element.type }}  </p> </div>
+                    <div class="like-icon"> <button id="accept">Accept </button> </div>
+                    <div class="like-icon"><button id="reject"> Reject </button> </div>
+                    <div class="time-ago">   {{ element.timestamp }}  </div>
+                </div>
+                {% empty %}
+                    <h3> You haven't received requests yet  </h3>
+                {% endfor %}
+
+                </div>
+
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+<script defer src="{% static 'js/me_requests.js' %}">  </script>
+
+
+    </div>
+{% endblock %}

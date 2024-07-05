@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titile %}
+    Music Exchange History
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-container">
+    <div class="card">
+        {% if image %}
+        <img  class="profile-img" src="{{ user.image.url }}" alt="">
+            {% else %}
+        <img  class="profile-img" src="{% static 'img/defaultimage.png' %}" alt="">
+        {% endif %}
+
+        <div class="divition">
+            <div class="links">
+                <h3 class="font-principal" id="username">{{ user.username }}</h3>
+
+                <a href=" {% url 'homepage' user.username %} ">Profile</a>
+                <a href="{% url 'library' user.username %}">Library </a>
+                <a href="{% url 'latest_report' user.username %}">Music Report</a>
+
+        </div>
+            </div>
+
+
+    </div>
+
+
+    <div class="main-container">
+
+    <div class="divition2" id="main-div">
+        <div class="card2">
+           <div class="links">
+                <h3 class="font-principal" id="username"> {{ request.type }} - {{ request.item_name }} </h3>
+
+               <a href="{{ request.spotify_link }}" target="_blank"> See on spotify </a>
+        </div>
+
+
+            <div class="table" id="table">
+
+
+                </div>
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="main-container">
+
+        <div class="divition3" id="main-div">
+        <div class="card2">
+
+            <div class="table" id="table">
+                <div class="row" >
+                        <div class="song-title"> <h5 class="ctext"> Image </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Artist Name </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Track Name </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Like </h5>   </div>
+
+                </div>
+
+            {# for song in history #}
+            {% for element in songs %}
+                <div class="row">
+                    <div class="img">
+                        <a href="{{ element.song_cover_url }}"><img class="cover-img" src="{{ element.song_cover_url }}" alt=""></a>
+                    </div>
+                    <div class="artist-name">  <p> {{ element.song_artist_name }} </p> </div>
+                    <div class="artist-name">  <p> {{ element.song_name }}  </p> </div>
+                    {% if element.liked   %}
+                        <div class="like-icon"> <button> Liked  </button>   </div>
+                    {% else %}
+                        <div class="like-icon"> <button> Like  </button>   </div>
+                    {% endif %}
+                </div>
+
+
+                {% empty %}
+                    <h3>There was an error during this request, please re-do it</h3>
+                {% endfor %}
+
+                </div>
+
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script defer src="">  </script>
+
+
+    </div>
+{% endblock %}

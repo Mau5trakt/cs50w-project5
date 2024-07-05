@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    User Profile
+{% endblock %}
+
+{% block content %}
+<div class="card-container">
+    <div class="card">
+
+
+    </div>
+
+    <div class="d-left">
+        <div class="card2">
+
+            <h3 class="font-principal"> Your Notifications</h3>
+            <div class="table">
+            <div class="row">
+                    {# Look for the image  <div class="img">a</div>   #}
+
+                <div class="artist-name">  Time ago </div>
+                <div class="like-icon">   Username   </div>
+                <div class="song-title"> Action  </div>
+
+                </div>
+                {% for notification in notifications %}
+                    <div class="row">
+                    {# Look for the image  <div class="img">a</div>   #}
+
+                <div class="artist-name"> {{ notification.timestamp | timesince }} ago </div>
+                <div class="like-icon"> <h4> <a href="{% url 'homepage' notification.user_from.username  %}"> {{ notification.user_from.username }} </a> </h4> </div>
+                <div class="song-title"> {{ notification.action }} </div>
+
+                </div>
+
+                {% empty %}
+                    <h4> Whoops, looks empty </h4>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

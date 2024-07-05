@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ user.username }}'s Profile
+{% endblock %}
+
+{% block content %}
+<div class="card-container">
+    <div class="card">
+        {% if image %}
+        <img  class="profile-img" src="{{ user.image.url }}" alt="">
+            {% else %}
+        <img  class="profile-img" src="{% static 'img/defaultimage.png' %}" alt="">
+        {% endif %}
+
+        <div class="divition">
+            <div class="links">
+                <h3 class="font-principal" id="username">{{ user.username }}</h3>
+
+                <a href="">Profile</a>
+                <a href="{% url 'library' user.username %}">Library </a>
+                <a href="{% url 'latest_report' user.username %}">Music Report</a>
+
+
+            <div class="details">
+                <div class="e1">
+                    <h4 class="secondary">Rolls</h4>
+                    <h4>{{ rolls }}</h4>
+                </div>
+                <div class="e1">
+                    <h4 class="secondary">Artists</h4>
+                    <h4>{{ artists }}</h4>
+                </div>
+            </div>
+
+        </div>
+            </div>
+
+
+    </div>
+
+
+    <div class="main-container">
+
+    <div class="d-left">
+        <div class="card2">
+            <h3 class="font-principal"> Recient Rolls </h3>
+            <a href="{% url 'library' user.username %}">Go to library </a>
+        <div class="row" >
+                    <div class="img">
+                        <p> Cover </p>
+                    </div>
+                    <div class="song-title"> <p> Name </p>   </div>
+                    <div class="artist-name"><p> Artist </p></div>
+                    <div class="time-ago">  Time Ago </div>
+                </div>
+
+            <div class="table" id="table">
+                {% for song in history %}
+                <div class="row" >
+                    <div class="img">
+
+                        <a href=/album/"{{song.song_album_id  }}"><img class="cover-img" src="{{ song.song_cover_url }}" alt=""></a>
+
+                    </div>
+                    <div class="song-title"> <p>  {{ song.song_name|truncatechars:40 }} </p>  </div>
+                    <div class="artist-name"> <p> {{ song.song_artist_name |truncatechars:40}} </p> </div>
+                    <div class="time-ago"> {{ song.timestamp | timesince }}  ago </div>
+                </div>
+                 {% empty %}
+                    <div class="row" >
+                    <div class="song-title"> <h1> This user hasn't rolled yet </h1>  </div>
+                </div>
+
+
+                {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+    <div class="d-rigth">
+        <div class="box">
+            <h2>{{ weekly_rolls }} Rolls this week</h2>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="divition2">
+        <div class="card3 eoverflow">
+            <h2>Top Albums</h2>
+
+            <div class="album-container">
+                {% for album in albums %}
+                <div class="album_item">
+                <div class="album-list-ctn">
+                    <a href=""><img class="album_list" src='{{ album.song_cover_url }}' alt=""></a>
+                </div>
+                    <p class="main-text"> {{ album.song_album_name }} </p>
+                    <p class="main-text"> {{ album.song_artist_name }} </p>
+                    <p class="normal-text"> {{ album.count }} plays </p>
+                </div>
+                {% empty %}
+                    <h1>This user hasn't rolled yet </h1>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="divition2">
+        <div class="card3 eoverflow">
+            <h2>Top Artists</h2>
+
+            <div class="album-container">
+
+                {% for artist in top_artists %}
+                <div class="album_item">
+                <div class="album-list-ctn">
+                    <a href=""><img class="album_list" src='{{ artist.song_artist_img }}' alt=""></a>
+                </div>
+                    <p class="main-text"> {{ artist.song_artist_name }} </p>
+                    <p class="normal-text"> {{ artist.count }} plays </p>
+                </div>
+                {% empty %}
+                    <h1>This user hasn't rolled yet </h1>
+
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="divition2">
+
+        <div class="card2">
+            <h3 class="font-principal"> Top Rolls </h3>
+            <a href="{% url 'library' user.username %}">Go to library </a>
+            <div class="table">
+
+            <div class="row" >
+                    <div class="img">
+                        <p> Cover </p>
+                    </div>
+                    <div class="song-title"> <p> Name </p>   </div>
+                    <div class="artist-name"><p> Artist </p></div>
+                    <div class="time-ago">  Rolls </div>
+                </div>
+
+
+                {% for song in top_songs %}
+                <div class="row" >
+                    <div class="img">
+                        <a href=/album/"{{song.song_album_id  }}"><img class="cover-img" src="{{ song.song_cover_url }}" alt=""></a>
+                    </div>
+                    <div class="song-title"> <p> {{ song.song_name|truncatechars:40 }} </p>   </div>
+                    <div class="artist-name"><p> {{ song.song_artist_name |truncatechars:40}} </p></div>
+                    <div class="time-ago"> {{ song.count  }} rolls </div>
+                </div>
+                 {% empty %}
+                    <div class="row" >
+                    <div class="song-title"> <h1> This user hasn't rolled yet </h1>  </div>
+                </div>
+
+
+                {% endfor %}
+                </div>
+
+            </div>
+
+
+    </div>
+
+
+</div>
+
+    {# <script defer src="{% static 'js/profile_table_updater.js' %}"> </script> #}
+
+{% endblock %}

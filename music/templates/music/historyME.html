@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titile %}
+    Music Exchange History
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-container">
+    <div class="card">
+        {% if image %}
+        <img  class="profile-img" src="{{ user.image.url }}" alt="">
+            {% else %}
+        <img  class="profile-img" src="{% static 'img/defaultimage.png' %}" alt="">
+        {% endif %}
+
+        <div class="divition">
+            <div class="links">
+                <h3 class="font-principal" id="username">{{ user.username }}</h3>
+
+                <a href=" {% url 'homepage' user.username %} ">Profile</a>
+                <a href="{% url 'library' user.username %}">Library </a>
+                <a href="{% url 'latest_report' user.username %}">Music Report</a>
+
+        </div>
+            </div>
+
+
+    </div>
+
+
+    <div class="main-container">
+
+    <div class="divition2" id="main-div">
+        <div class="card2">
+           <div class="links">
+                <h3 class="font-principal" id="username">History</h3>
+                <a href="{% url 'create_me' %}">Create</a>
+                <a href="{% url 'music_exchange' %}">Music Exchange Requests</a>
+        </div>
+
+
+            <div class="table" id="table">
+
+
+                </div>
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="main-container">
+
+        <div class="divition3" id="main-div">
+        <div class="card2">
+           <div class="links">
+                <h3 class="font-principal" id="username">Accepted</h3>
+        </div>
+
+
+            <div class="table" id="table">
+
+                <div class="row" >
+                        <div class="song-title"> <h5 class="ctext"> From </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Image </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Item Name </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Type </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> See on spotify </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Go to the request </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Date </h5>   </div>
+                </div>
+
+            {# for song in history #}
+            {% for element in accepted %}
+
+                <div class="row" >
+                        <div class="song-title"><a href="{% url 'homepage' element.owner %}"> <h4> {{ element.owner }} </h4> </a> </div>
+                    <div class="img">
+                        <a href="{{ element.spotify_link }}"><img class="cover-img" src="{{ element.item_image_url }}" alt=""></a>
+                    </div>
+
+                    <div class="artist-name">  <p> {{ element.item_name }} </p> </div>
+                    <div class="artist-name">  <p> {{ element.type }}  </p> </div>
+                    <div class="like-icon"><a href="{{ element.spotify_link }}" target="_blank"> <button> See on spotify </button> </a>  </div>
+                    <div class="like-icon"><a href="{% url 'request_element' element.id %}" > <button> Go to the request </button> </a>  </div>
+                    <div class="time-ago">   {{ element.timestamp }}  </div>
+                </div>
+
+            {% empty %}
+                <h3> You haven't received requests yet  </h3>
+            {% endfor %}
+
+                </div>
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="main-container">
+
+    <div class="divition3" id="main-div">
+        <div class="card2">
+           <div class="links">
+                <h3 class="font-principal" id="username">Sent</h3>
+
+        </div>
+
+
+            <div class="table" id="table">
+                <div class="row" >
+                        <div class="song-title"> <h5 class="ctext"> To </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Image </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Item Name </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Type </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> See on spotify </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Go to the request </h5>   </div>
+                        <div class="song-title"> <h5 class="ctext"> Date </h5>   </div>
+                </div>
+
+
+            {# for song in history #}
+                {% for element in sended %}
+
+                    <div class="row" >
+                        <div class="song-title"><a href="{% url 'homepage' element.to %}"> <h4> {{ element.to }} </h4> </a> </div>
+                    <div class="img">
+                        <a href="{{ element.spotify_link }}"><img class="cover-img" src="{{ element.item_image_url }}" alt=""></a>
+                    </div>
+
+                    <div class="artist-name">  <p> {{ element.item_name }} </p> </div>
+                    <div class="artist-name">  <p> {{ element.type }}  </p> </div>
+                    <div class="like-icon"><a href="{{ element.spotify_link }}" target="_blank"> <button> See on spotify </button> </a>  </div>
+                    <div class="like-icon"><a href="{% url 'request_element' element.id %}" > <button> Go to the request </button> </a>  </div>
+                    <div class="time-ago">   {{ element.timestamp }}  </div>
+                </div>
+
+                {% empty %}
+                    <h3> You haven't sent requests yet  </h3>
+
+                {% endfor %}
+
+                </div>
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+<script defer src="">  </script>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titile %}
+    {{ user.username }} History
+{% endblock %}
+
+{% block content %}
+
+    <div class="main-container">
+
+    <div class="d-left">
+        <div class="card2">
+            <h3 class="font-principal"> Recient Rolls </h3>
+            <a href="">Go to library </a>
+            <div class="table" id="table">
+            {# for song in history #}
+
+                  <div class="row" >
+                    <div class="img">
+
+                        <a href=/album/"" class="primary-a"><img class="cover-img" src="" alt=""></a>
+
+                    </div>
+                    <div class="like-icon"><button> like </button> </div>
+                    <div class="song-title"><a href="" class="secondary-a">a</a> </div>
+                    <div class="artist-name"><a href="" class="secondary-a">a</a></div>
+                    <div class="time-ago">   ago </div>
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    <div class="d-rigth">
+        <div class="box">
+            <h2> Rolls this week</h2>
+        </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

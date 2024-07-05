@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Rolalog: Create music request
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-container">
+    <div class="card">
+        {% if image %}
+        <img  class="profile-img" src="{{ user.image.url }}" alt="">
+            {% else %}
+        <img  class="profile-img" src="{% static 'img/defaultimage.png' %}" alt="">
+        {% endif %}
+
+        <div class="divition">
+            <div class="links">
+                <h3 class="font-principal" id="username">{{ user.username }}</h3>
+
+                <a href=" {% url 'homepage' user.username %} ">Profile</a>
+                <a href="{% url 'library' user.username %}">Library </a>
+                <a href="{% url 'latest_report' user.username %}">Music Report</a>
+
+        </div>
+            </div>
+
+
+    </div>
+
+
+    <div class="main-container">
+
+    <div class="divition2" id="main-div">
+        <div class="card2">
+           <div class="links">
+                <h3 class="font-principal" id="username">Create</h3>
+                <a href="{% url 'music_exchange' %}">Music Exchange Requests</a>
+                <a href="{% url 'history_me' %}">History</a>
+        </div>
+            <div class="text">
+                <p id="textReference"> Enter a username, search what you want to send, select it and send it  </p>
+            </div>
+
+            <div class="form-container">
+                <div class="input-ctn">
+                    <label for="username"> Enter Rolalog username </label>
+                    <input type="text" id="usernameq" name="username" class="incorrect" isvalid="False">
+                    <p class="alert-text" id="text-incorrect">  </p>
+                </div>
+                <div class="input-ctn">
+                    <label for="search"> Spotify Search </label>
+                    <input type="text" id="search" name="search" class="">
+                    <p class="alert-text" id="second-text-incorrect">   </p>
+                </div>
+
+
+            </div>
+
+            <div class="table" id="itemtosend">
+                <h4>Selected: </h4>
+
+                
+
+
+
+
+            </div>
+
+            <div class="form-container">
+                <div class="input-ctn2">
+                    <button id="send">Send</button>
+                    <button id="delete">Delete</button>
+                </div>
+
+
+            {# for song in history #}
+
+                <!-- <div class="row" >
+                    <div class="img">
+
+                        <a href=/album/""><img class="cover-img" src="" alt=""></a>
+
+                    </div>
+                    <div class="like-icon"><button> like </button> </div>
+                    <div class="song-title"><a href="">a</a> </div>
+                    <div class="artist-name"><a href="">a</a></div>
+                    <div class="time-ago">   ago </div>
+                </div> -->
+
+                </div>
+
+                <div class="table" id="table">
+
+
+
+            </div>
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+<script defer src="{% static 'js/create_music_exchange.js' %}">  </script>
+
+
+    </div>
+{% endblock %}

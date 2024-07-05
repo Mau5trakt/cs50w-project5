@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titile %}
+    Library {{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-container">
+    <div class="card">
+        {% if image %}
+        <img  class="profile-img" src="{{ user.image.url }}" alt="">
+            {% else %}
+        <img  class="profile-img" src="{% static 'img/defaultimage.png' %}" alt="">
+        {% endif %}
+
+        <div class="divition">
+            <div class="links">
+                <h3 class="font-principal" id="username">{{ user.username }}</h3>
+
+                <a href=" {% url 'homepage' user.username %} ">Profile</a>
+                <a href="{% url 'library' user.username %}">Library </a>
+                <a href="{% url 'latest_report' user.username %}">Music Report</a>
+
+
+
+
+        </div>
+            </div>
+
+
+    </div>
+
+
+    <div class="main-container">
+
+    <div class="d-left" id="main-div">
+        <div class="card2">
+            <h3 class="font-principal" id="title"> User Library </h3>
+
+            <div class="row">
+                <div class="item">
+                    <p class="textToA sectionItem">Rolls</p>
+                </div>
+                <div class="item">
+                    <p class="textToA sectionItem">Albums</p>
+                </div>
+                <div class="item">
+                    <p class="textToA sectionItem">Artists</p>
+                </div>
+                <div class="item">
+                    <p class="textToA sectionItem">Songs</p>
+                </div>
+            </div>
+
+
+
+
+            <div class="table" id="table">
+            {# for song in history #}
+
+                <!-- <div class="row" >
+                    <div class="img">
+
+                        <a href=/album/""><img class="cover-img" src="" alt=""></a>
+
+                    </div>
+                    <div class="like-icon"><button> like </button> </div>
+                    <div class="song-title"><a href="">a</a> </div>
+                    <div class="artist-name"><a href="">a</a></div>
+                    <div class="time-ago">   ago </div>
+                </div> -->
+
+                </div>
+                <div class="row" id="pagination_pages">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<script defer src="{% static 'js/library.js' %}">  </script>
+
+{% endblock %}

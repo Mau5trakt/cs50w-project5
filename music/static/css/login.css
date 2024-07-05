@@ -1,0 +1,254 @@
+:root{
+    --strong-red: #E10600;
+    --white-body: #F7F4F1;
+    --strong-gray: #38383F;
+
+    /*  Variables for this */
+    --backgorund-gray: #D9D9D9;
+    --strong-white: #FFFFFF;
+}
+
+
+body{
+    letter-spacing: .2px;
+    background-color: var(--backgorund-gray);
+    font-family: 'Poppins';
+}
+
+
+
+.site-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white-body);
+    height: 60px;
+    border-radius: 50px;
+    margin: 5px 10px 0 5px;
+
+    a{
+        text-decoration: none;
+        color: inherit;
+        font-size: 32px;
+        margin-left: 20px;
+    }
+
+    .link{
+        margin-right: 20px;
+        font-size: 20px;
+
+    }
+
+}
+/*  text styles */
+.font-principal{
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.font-text-bold{
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/*
+.font-principal{
+    color: #333333;
+    font-family: f1bold, sans-serif;
+    /* border: 3px solid greenyellow;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-top: 0;
+
+    margin-bottom: 15px;
+}
+*/
+
+.link-container{
+    background-color: var(--strong-gray);
+    display: flex;
+    justify-content: center;
+
+    a{
+        color: #FFF;
+        font-size: 14px;
+        letter-spacing: .5px;
+        text-decoration: none;
+        padding: 15px 25px;
+        margin: 0 5px;
+        /* margin: 18px 20px 0px 10px; */
+
+    }
+
+    .principal{
+        border-bottom: 4px solid #ee0000;
+        font-family: f1bold, sans-serif;
+    }
+
+
+    .secondary{
+        font-family: f1regular, sans-serif;
+    }
+
+    .secondary:hover{
+        border-bottom: 4px solid #FFF;
+
+    }
+
+
+
+}
+
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.shadow{
+    -webkit-box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+}
+
+.logo{
+    float: left;
+  display: flex;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  gap: 5px;
+
+}
+
+.container{
+    width: 95%;
+  margin: auto;
+    a{
+        text-decoration: none;
+    color: inherit;
+    font-size: 32px;
+    margin-left: 20px;
+        font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+    }
+}
+
+.logo-img{
+    width: 65px;
+  height: 40px;
+    }
+
+.card{
+    background-color: var(--white-body);
+    margin-top: 20px;
+    border-radius: 50px;
+    padding: 0px 20px;
+    max-width: 100%;
+    width: 1034px;
+
+}
+
+form{
+    display: flex;
+    justify-content: center;
+
+    flex-direction: column;
+    width: 100%;
+    height: 95%;
+
+}
+
+form > p{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.h3text{
+
+}
+
+label{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.input{
+    background-color: #FFF;
+    border-radius: 10px;
+    height: 30px;
+    border: 2px solid #999999;
+    font-family: inherit;
+    padding-left: 10px;
+
+}
+
+
+.btn-ctn{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.btn{
+    padding-left: 10px;
+    width: 174px;
+    height: 66px;
+    background-color: #FFDF33;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: .5px;
+    font-weight: 500;
+    border: 1px solid #FFDF33;
+    color:#000000 ;
+
+}
+
+/*.btn:hover{
+    background-color: #F7F4F1;
+    border: 2px solid var(--strong-red);
+    color: #333333;
+}*/
+
+
+@media only screen and (max-width: 600px) {
+    .content {
+        padding: 0 10px;
+    }
+
+    .card {
+        width: 90%;
+    }
+
+    .h3text {
+        font-size: 24px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .input {
+        width: calc(100% - 20px); /* Ancho del 100% menos el espacio de los lados */
+        margin: 10px 0;
+    }
+
+    .btn-ctn {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .btn {
+        width: 40%;
+        margin-top: 20px;
+    }
+}
